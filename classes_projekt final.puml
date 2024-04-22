@@ -1,0 +1,52 @@
+@startuml classes_projekt
+set namespaceSeparator none
+class "Borrower" as main.Borrower {
+  borrowed_cars : int
+  name : str
+  borrow_car(car: Car) -> str
+  increment_borrowed_cars() -> None
+  return_car(car: Car) -> str
+}
+class "Branch" as main.Branch {
+  borrowers : list[Borrower]
+  cars : list[Car]
+  employees : list[Employee]
+  location : str
+  add_borowers(new_borrowers: list[Borrower]) -> None
+  add_cars(new_cars: list[Car]) -> None
+  add_employees(new_employees: list[Employee]) -> None
+  borrow_car(car: Car, borrower: Borrower, employee: Employee) -> Any
+  display_cars() -> None
+  print_availible_cars() -> None
+  print_cars_made_in_period(period_s: int, period_e) -> None
+  print_not_availible_cars() -> None
+  print_stats_of_branch() -> None
+  print_the_best_employee() -> None
+  return_car(car: Car, borrower: Borrower) -> Any
+}
+class "Car" as main.Car {
+  brand : str
+  count_of_borrows : int
+  is_free : bool
+  model : str
+  year_of_making : int
+  borrow() -> str
+  return_car() -> str
+}
+class "Employee" as main.Employee {
+  borrowed_cars : int
+  date_of_hire
+  name : str
+  plat : int
+  get_borrowed_cars_count() -> int
+  get_days_on_job() -> int
+  get_days_on_job_borrowed_cars_rate() -> int
+  increment_borrowed_cars()
+}
+
+
+main.Branch "1"	o--  "0..*" main.Employee
+main.Branch "1"	o--  "0..*" main.Borrower
+main.Branch "1"	o--  "0..*" main.Car
+
+@enduml
